@@ -10,6 +10,8 @@ public interface TaskService {
 
     Task get(Long id);
 
+    List<Task> getByDeveloperId(Long id);
+
     Task save(Task task);
 
     Task update(Task task);

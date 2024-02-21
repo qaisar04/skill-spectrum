@@ -27,6 +27,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getByDeveloperId(Long id) {
+        return taskRepository.findAllByAssignedDeveloperId(id);
+    }
+
+    @Override
     public Task save(Task task) {
         return taskRepository.save(task);
     }
