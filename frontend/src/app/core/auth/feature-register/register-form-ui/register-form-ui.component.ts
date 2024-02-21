@@ -5,6 +5,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {RegisterPayload} from "../../data-access/models/sign.model";
 
 @Component({
   selector: 'app-register-form-ui',
@@ -22,6 +23,8 @@ import {Router} from "@angular/router";
 export class RegisterFormUiComponent {
   public hide = true
   @Output() redirectToSignIn = new EventEmitter()
+  @Output() register = new EventEmitter()
+
 
   public formGroup = new FormBuilder().group({
     name: new FormControl('', [Validators.required]),
@@ -29,6 +32,9 @@ export class RegisterFormUiComponent {
     email: new FormControl('', [
       Validators.required,
       Validators.email,
+    ]),
+    inviteCode: new FormControl('', [
+      Validators.required,
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -40,7 +46,15 @@ export class RegisterFormUiComponent {
     ]),
   })
   onRegister() {
-    console.log(this.formGroup.getRawValue())
+    const userData: RegisterPayload = {
+      name: this.formGroup.value.name as string,
+      username: this.formGroup.value.username as string,
+      password: this.formGroup.value.password as string,
+      confirmPassword: this.formGroup.value.confirmPassword as string,
+      inviteCode: this.formGroup.value.inviteCode as string,
+      email: this.formGroup.value.email as string
+    }
+    this.register.emit(userData)
   }
   onRedirectToSignIn() {
     this.redirectToSignIn.emit()
