@@ -64,6 +64,7 @@
         <module>mail-service</module>
         <module>invitation-code-service</module>
         <module>developer-service</module>
+        <module>task-service</module>
     </modules>
 
     <build>
