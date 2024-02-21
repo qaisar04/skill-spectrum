@@ -63,6 +63,7 @@
         <module>identity-service</module>
         <module>mail-service</module>
         <module>invitation-code-service</module>
+        <module>developer-service</module>
     </modules>
 
     <build>

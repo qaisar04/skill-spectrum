@@ -116,7 +116,7 @@ public class UserService {
     }
 
     private void checkRole(UserRequest userRequest, User user) {
-         if (user.getRole().equals(Role.STUDENT)) {
+         if (user.getRole().equals(Role.DEVELOPER)) {
              kafkaTemplate.send(studentQueue, new StudentRequest(
                      userRequest.getName(), userRequest.getEmail()
              ));
