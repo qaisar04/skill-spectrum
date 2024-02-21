@@ -22,9 +22,9 @@
         <module name="developer-service" />
         <module name="api-gateway" />
         <module name="task-service" />
-        <module name="identity-service" />
         <module name="invitation-code-service" />
         <module name="mail-service" />
+        <module name="identity-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>

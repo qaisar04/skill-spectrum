@@ -12,3 +12,7 @@ spring:
     show-sql: true
 server:
   port: 0
+springdoc:
+  api-docs:
+    enabled: true
+    path: /swagger-ui.html
