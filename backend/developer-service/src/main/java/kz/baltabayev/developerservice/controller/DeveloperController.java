@@ -18,28 +18,28 @@ public class DeveloperController {
     private final DeveloperService developerService;
     private final DeveloperMapper developerMapper;
 
-    @GetMapping
-    public ResponseEntity<List<Developer>> getAllStudents() {
+    @GetMapping("/all")
+    public ResponseEntity<List<Developer>> getAllDevelopers() {
         return ResponseEntity.ok(developerService.getAll());
     }
 
     @GetMapping("/info/{id}")
-    public ResponseEntity<?> getInfoStudent(@PathVariable Long id) {
+    public ResponseEntity<?> getInfoDeveloper(@PathVariable Long id) {
         return ResponseEntity.ok(developerService.getInfo(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Developer> createStudent(@RequestBody DeveloperRequest developerRequest) {
+    public ResponseEntity<Developer> createDeveloper(@RequestBody DeveloperRequest developerRequest) {
         return ResponseEntity.ok(developerService.save(developerMapper.toEntity(developerRequest)));
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Developer> updateStudent(@RequestBody DeveloperRequest developerRequest) {
+    public ResponseEntity<Developer> updateDeveloper(@RequestBody DeveloperRequest developerRequest) {
         return ResponseEntity.ok(developerService.update(developerMapper.toEntity(developerRequest)));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id) {
+    public ResponseEntity<String> deleteDeveloper(@PathVariable Long id) {
         developerService.delete(id);
         return ResponseEntity.ok("Developer with id: " + id + " was deleted");
     }

@@ -1,8 +1,8 @@
 spring:
   application:
-    name: developer-service
+    name: task-service
   datasource:
-    url:  jdbc:postgresql://localhost:5434/dev-service
+    url:  jdbc:postgresql://localhost:5435/task-service
     password: qaisar
     username: qaisar
     driver-class-name: org.postgresql.Driver

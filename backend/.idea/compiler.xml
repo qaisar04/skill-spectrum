@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -18,11 +19,12 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok-mapstruct-binding/0.2.0/lombok-mapstruct-binding-0.2.0.jar" />
         </processorPath>
-        <module name="api-gateway" />
         <module name="developer-service" />
+        <module name="api-gateway" />
+        <module name="task-service" />
+        <module name="identity-service" />
         <module name="invitation-code-service" />
         <module name="mail-service" />
-        <module name="identity-service" />
         <module name="discovery-service" />
       </profile>
     </annotationProcessing>
@@ -40,6 +42,7 @@
       <module name="invitation-code-service" options="-parameters" />
       <module name="logging-spring-boot-starter" options="-parameters" />
       <module name="mail-service" options="-parameters" />
+      <module name="task-service" options="-parameters" />
       <module name="university-portal" options="-parameters" />
     </option>
   </component>
