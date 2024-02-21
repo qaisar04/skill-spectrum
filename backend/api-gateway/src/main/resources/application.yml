@@ -12,7 +12,7 @@ spring:
         - id: indentity-service
           uri: lb://indentity-service
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
         - id: discovery-server
           uri: http://localhost:8761
           predicates:
@@ -22,7 +22,7 @@ spring:
         - id: invitation-code-service
           uri: http://localhost:1465
           predicates:
-            - Path=/invite-code/**
+            - Path=/api/invite-code/**
           filters:
             - AuthenticationFilter
         - id: discovery-server-static
