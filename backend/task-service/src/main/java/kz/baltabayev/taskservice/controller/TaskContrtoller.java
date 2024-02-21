@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/task")
+@RequestMapping("/api/task")
 @RequiredArgsConstructor
 public class TaskContrtoller {
 

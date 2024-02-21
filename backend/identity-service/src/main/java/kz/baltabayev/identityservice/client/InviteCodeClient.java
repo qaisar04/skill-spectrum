@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "invitation-code-service", path = "/invite-code")
+@FeignClient(name = "invitation-code-service", path = "/api/invite-code")
 public interface InviteCodeClient {
 
     @GetMapping("/link/{code}")
