@@ -1,5 +1,5 @@
 export const environment = {
-  api_url: '',
+  api_url: 'localhost:8585',
 };
 
 

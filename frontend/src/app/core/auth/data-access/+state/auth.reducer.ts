@@ -33,5 +33,10 @@ export const authFeature = createFeature({
       ...state,
       ...authInitialState
     })),
+
+    on(authActions.registerSuccess, (state) => ({
+      ...state,
+      authStatus: 'loaded' as const,
+    })),
   )
 })
