@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: manager-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: qaisar
+    password: qaisar
+    url: jdbc:postgresql://localhost:5436/manager-service
+  jpa:
+    hibernate:
+      ddl-auto: create
+springdoc:
+  api-docs:
+    enabled: true
+    path: /swagger-ui.html
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8791
+
+#  http://localhost:8791/swagger-ui/index.html

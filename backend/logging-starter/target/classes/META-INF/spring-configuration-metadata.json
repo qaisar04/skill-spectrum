@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "app.common.logging",
+      "type": "kz.baltabayev.loggingstarter.config.LoggingProperties",
+      "sourceType": "kz.baltabayev.loggingstarter.config.LoggingProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.common.logging.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Flag to enable common logging AOP on the service layer. Defaults to true.",
+      "sourceType": "kz.baltabayev.loggingstarter.config.LoggingProperties"
+    }
+  ],
+  "hints": []
+}
