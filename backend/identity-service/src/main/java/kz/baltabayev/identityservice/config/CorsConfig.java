@@ -37,5 +37,4 @@ public class CorsConfig extends CorsConfiguration implements WebMvcConfigurer{
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }
-
 }
