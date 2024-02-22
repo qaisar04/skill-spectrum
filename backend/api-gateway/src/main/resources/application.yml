@@ -10,7 +10,7 @@ spring:
     gateway:
       routes:
         - id: indentity-service
-          uri: lb://indentity-service
+          uri: http://indentity-service
           predicates:
             - Path=/api/auth/**
         - id: discovery-server
