@@ -11,7 +11,7 @@ describe('RegisterFormUiComponent', () => {
       imports: [RegisterFormUiComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(RegisterFormUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

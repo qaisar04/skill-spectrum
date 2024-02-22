@@ -12,7 +12,7 @@ export class AuthEffects {
     (api = inject(ApiService), actions$ = inject(Actions)) => actions$.pipe(
       ofType(authActions.register),
       switchMap(({ req }) => {
-        return api.post<any, RegisterPayload>('/auth/register', req)
+        return api.post<any, RegisterPayload>('/api/auth/register', req)
           .pipe(
             map(() => {
               console.log('register successful')
