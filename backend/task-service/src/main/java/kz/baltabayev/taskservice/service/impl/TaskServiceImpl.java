@@ -30,7 +30,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAllByAssignedDeveloperIdAndStatus(Long assignedDeveloperId, Status status) {
+    public List<Task> getAllByDeveloperIdAndStatus(Long assignedDeveloperId, Status status) {
         return getByDeveloperId(assignedDeveloperId)
                 .stream()
                 .filter(task -> task.getStatus().equals(status))

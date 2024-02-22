@@ -32,7 +32,7 @@ public class TaskContrtoller {
 
     @GetMapping("/id/{id}/{status}")
     public ResponseEntity<List<Task>> getTasksByDeveloperIdAndStatus(@PathVariable Long id, @PathVariable String status) {
-        return ResponseEntity.ok(taskService.getAllByAssignedDeveloperIdAndStatus(id, Status.valueOf(status.toUpperCase())));
+        return ResponseEntity.ok(taskService.getAllByDeveloperIdAndStatus(id, Status.valueOf(status.toUpperCase())));
     }
 
     @PostMapping("/create")

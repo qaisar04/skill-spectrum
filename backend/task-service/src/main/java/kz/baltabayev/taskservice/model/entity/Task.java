@@ -28,6 +28,6 @@ public class Task {
     @PrePersist
     public void prePersist() {
         createdAt = LocalDateTime.now();
-        status = Status.NEW;
+        status = Status.IN_PROGRESS;
     }
 }
