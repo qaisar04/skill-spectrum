@@ -4,11 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum Status {
-    NEW("Новая"),
     IN_PROGRESS("В работе"),
-    DONE("Завершена"),
-    ON_HOLD("На паузе"),
-    CANCELLED("Отменена");
+    DONE("Завершена");
 
     private final String description;
 

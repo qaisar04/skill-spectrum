@@ -3,6 +3,7 @@ package kz.baltabayev.taskservice.controller;
 import kz.baltabayev.taskservice.mapper.TaskMapper;
 import kz.baltabayev.taskservice.model.dto.TaskDto;
 import kz.baltabayev.taskservice.model.entity.Task;
+import kz.baltabayev.taskservice.model.types.Status;
 import kz.baltabayev.taskservice.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class TaskContrtoller {
     @GetMapping("/id/{id}")
     public ResponseEntity<List<Task>> getTasksByDeveloperId(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.getByDeveloperId(id));
+    }
+
+    @GetMapping("/id/{id}/{status}")
+    public ResponseEntity<List<Task>> getTasksByDeveloperIdAndStatus(@PathVariable Long id, @PathVariable String status) {
+        return ResponseEntity.ok(taskService.getAllByAssignedDeveloperIdAndStatus(id, Status.valueOf(status.toUpperCase())));
     }
 
     @PostMapping("/create")

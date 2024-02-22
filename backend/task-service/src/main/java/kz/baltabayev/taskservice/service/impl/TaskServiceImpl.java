@@ -2,12 +2,15 @@ package kz.baltabayev.taskservice.service.impl;
 
 import kz.baltabayev.taskservice.exception.TaskNotFoundException;
 import kz.baltabayev.taskservice.model.entity.Task;
+import kz.baltabayev.taskservice.model.types.Status;
 import kz.baltabayev.taskservice.repository.TaskRepository;
 import kz.baltabayev.taskservice.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +30,19 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getAllByAssignedDeveloperIdAndStatus(Long assignedDeveloperId, Status status) {
+        return getByDeveloperId(assignedDeveloperId)
+                .stream()
+                .filter(task -> task.getStatus().equals(status))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Task> getByDeveloperId(Long id) {
-        return taskRepository.findAllByAssignedDeveloperId(id);
+        return taskRepository.findAllByAssignedDeveloperId(id)
+                .stream()
+                .sorted(Comparator.comparing(Task::getCreatedAt))
+                .collect(Collectors.toList());
     }
 
     @Override
