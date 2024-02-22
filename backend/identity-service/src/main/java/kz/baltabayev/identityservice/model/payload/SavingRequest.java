@@ -1,6 +1,6 @@
 package kz.baltabayev.identityservice.model.payload;
 
-public record StudentRequest(
+public record SavingRequest(
         String name,
         String email
 ) {
