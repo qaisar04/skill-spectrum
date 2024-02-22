@@ -28,7 +28,7 @@ public class TaskContrtoller {
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<List<TaskDto>> getTasksById(@PathVariable Long id) {
+    public ResponseEntity<List<TaskDto>> getTasksByDeveloperId(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.getByDeveloperId(id)
                 .stream()
                 .map(taskMapper::toDto)

@@ -1,10 +1,12 @@
 package kz.baltabayev.developerservice.service.impl;
 
+import kz.baltabayev.developerservice.client.TaskServiceClient;
 import kz.baltabayev.developerservice.exception.DeveloperNotFoundException;
 import kz.baltabayev.developerservice.mapper.DeveloperMapper;
 import kz.baltabayev.developerservice.model.dto.DeveloperInfoResponse;
 import kz.baltabayev.developerservice.model.dto.DeveloperRequest;
 import kz.baltabayev.developerservice.model.entity.Developer;
+import kz.baltabayev.developerservice.model.payload.Task;
 import kz.baltabayev.developerservice.repository.DeveloperRepository;
 import kz.baltabayev.developerservice.service.DeveloperService;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +21,18 @@ public class DeveloperServiceImpl implements DeveloperService {
 
     private final DeveloperRepository developerRepository;
     private final DeveloperMapper developerMapper;
+    private final TaskServiceClient taskServiceClient;
 
     @Override
     public DeveloperInfoResponse getInfo(Long id) {
-        Developer developer = get(id);
-        DeveloperRequest developerRequest = developerMapper.toDto(developer);
-        return new DeveloperInfoResponse(); //todo
+        DeveloperRequest developerRequest = developerMapper.toDto(get(id));
+        List<Task> tasks = getByDeveloperId(id);
+        return new DeveloperInfoResponse(developerRequest, tasks);
+    }
+
+    @Override
+    public List<Task> getByDeveloperId(Long id) {
+        return taskServiceClient.getTasksByDeveloperId(id).getBody();
     }
 
     @Override

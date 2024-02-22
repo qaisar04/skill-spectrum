@@ -28,6 +28,7 @@ target/
 **/*.cmd
 **/*mvnw
 mvnw
+t
 
 ### NetBeans ###
 /nbproject/private/

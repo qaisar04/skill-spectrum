@@ -2,6 +2,7 @@ package kz.baltabayev.developerservice.service;
 
 import kz.baltabayev.developerservice.model.dto.DeveloperInfoResponse;
 import kz.baltabayev.developerservice.model.entity.Developer;
+import kz.baltabayev.developerservice.model.payload.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 public interface DeveloperService {
 
     DeveloperInfoResponse getInfo(Long id);
+
+    List<Task> getByDeveloperId(Long id);
 
     void delete(Long id);
 
