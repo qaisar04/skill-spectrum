@@ -20,19 +20,13 @@ public class TaskContrtoller {
     private final TaskMapper taskMapper;
 
     @GetMapping("/all")
-    public ResponseEntity<List<TaskDto>> getAllTasks() {
-        return ResponseEntity.ok(taskService.getAll()
-                .stream()
-                .map(taskMapper::toDto)
-                .collect(Collectors.toList()));
+    public ResponseEntity<List<Task>> getAllTasks() {
+        return ResponseEntity.ok(taskService.getAll());
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<List<TaskDto>> getTasksByDeveloperId(@PathVariable Long id) {
-        return ResponseEntity.ok(taskService.getByDeveloperId(id)
-                .stream()
-                .map(taskMapper::toDto)
-                .collect(Collectors.toList()));
+    public ResponseEntity<List<Task>> getTasksByDeveloperId(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.getByDeveloperId(id));
     }
 
     @PostMapping("/create")
