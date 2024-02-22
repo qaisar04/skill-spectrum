@@ -2,8 +2,10 @@ package kz.baltabayev.identityservice.controller;
 
 import jakarta.validation.Valid;
 import kz.baltabayev.identityservice.model.dto.AuthRequest;
+import kz.baltabayev.identityservice.model.dto.SecurityResponse;
 import kz.baltabayev.identityservice.model.dto.TokenResponse;
 import kz.baltabayev.identityservice.model.dto.UserRequest;
+import kz.baltabayev.identityservice.model.entity.User;
 import kz.baltabayev.identityservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,20 +14,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class SecurityController {
 
     private final UserService userService;
 
     @PostMapping("/register")
-    ResponseEntity<String> register(@Valid @RequestBody UserRequest userRequest) {
-        userService.register(userRequest);
-        return ResponseEntity.ok("User is saved!");
+    ResponseEntity<SecurityResponse> register(@Valid @RequestBody UserRequest userRequest) {
+        return ResponseEntity.ok(userService.register(userRequest));
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<TokenResponse> authenticate(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<SecurityResponse> authenticate(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ok(userService.authenticate(authRequest));
     }
 

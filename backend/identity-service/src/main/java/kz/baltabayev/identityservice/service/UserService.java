@@ -4,11 +4,9 @@ import kz.baltabayev.identityservice.client.InviteCodeClient;
 import kz.baltabayev.identityservice.exception.InvalidCredentialsException;
 import kz.baltabayev.identityservice.exception.PasswordMismatchException;
 import kz.baltabayev.identityservice.exception.UserAlreadyExistsException;
+import kz.baltabayev.identityservice.exception.UserNotFoundException;
 import kz.baltabayev.identityservice.mapper.UserMapper;
-import kz.baltabayev.identityservice.model.dto.AuthRequest;
-import kz.baltabayev.identityservice.model.dto.EmailMessageDto;
-import kz.baltabayev.identityservice.model.dto.TokenResponse;
-import kz.baltabayev.identityservice.model.dto.UserRequest;
+import kz.baltabayev.identityservice.model.dto.*;
 import kz.baltabayev.identityservice.model.entity.User;
 import kz.baltabayev.identityservice.model.payload.DeveloperSavingRequest;
 import kz.baltabayev.identityservice.model.payload.SavingRequest;
@@ -58,8 +56,8 @@ public class UserService {
     @Value("${spring.kafka.queues.email}")
     private String emailSendingQueue;
 
-    public void register(UserRequest userRequest) {
-        validateUserDetails(userRequest);
+    public SecurityResponse register(UserRequest userRequest) {
+        validatePasswordConfirmation(userRequest.getPassword(), userRequest.getConfirmPassword());
 
         User user = userMapper.toUser(userRequest);
         String inviteCode = userRequest.getInviteCode();
@@ -72,12 +70,16 @@ public class UserService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        String token = jwtTokenUtils.generateToken(userDetails);
 
 //        sendGreetingEmail(userRequest);
-        userRepository.save(user);
+        return new SecurityResponse(user, token);
     }
 
-    public TokenResponse authenticate(AuthRequest authRequest) {
+    public SecurityResponse authenticate(AuthRequest authRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password())
@@ -87,27 +89,16 @@ public class UserService {
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.username());
+        User user = findByUsername(authRequest.username());
         String token = jwtTokenUtils.generateToken(userDetails);
 
-        return new TokenResponse(token);
+        return new SecurityResponse(user, token);
     }
 
     private void validatePasswordConfirmation(String password, String confirmPassword) {
         if (!password.equals(confirmPassword)) {
             throw new PasswordMismatchException("Passwords don't match.");
         }
-    }
-
-    private void validateUserDetails(UserRequest userRequest) {
-        if (findByUsername(userRequest.getUsername()).isPresent()) {
-            throw new UserAlreadyExistsException("The user with the specified username exists.");
-        }
-
-        if (findByUsername(userRequest.getEmail()).isPresent()) {
-            throw new UserAlreadyExistsException("The user with the specified email exists.");
-        }
-
-        validatePasswordConfirmation(userRequest.getPassword(), userRequest.getConfirmPassword());
     }
 
     private void sendGreetingEmail(UserRequest userRequest) {
@@ -140,7 +131,8 @@ public class UserService {
         return inviteCodeClient.generate(role).getBody();
     }
 
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(username));
     }
 }
