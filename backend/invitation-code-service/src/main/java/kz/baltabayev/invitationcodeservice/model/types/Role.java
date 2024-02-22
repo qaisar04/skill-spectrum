@@ -1,17 +1,12 @@
 package kz.baltabayev.invitationcodeservice.model.types;
 
-/**
- * Enum representing the role of a user.
- * It can be either ADMIN or STUDENT.
- */
 public enum Role {
-    /**
-     * Represents an admin user.
-     */
+    MANAGER,
     ADMIN,
-
-    /**
-     * Represents a student user.
-     */
-    STUDENT
+    DEV_INTERN,
+    DEV_JUNIOR,
+    DEV_STRONG_JUNIOR,
+    DEV_MIDDLE,
+    DEV_MIDDLE_PLUS,
+    DEV_SENIOR
 }
