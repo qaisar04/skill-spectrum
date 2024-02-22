@@ -23,6 +23,11 @@ public class DeveloperController {
         return ResponseEntity.ok(developerService.getAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Developer> getDevelopById(@PathVariable Long id) {
+        return ResponseEntity.ok(developerService.get(id));
+    }
+
     @GetMapping("/info/{id}")
     public ResponseEntity<?> getInfoDeveloper(@PathVariable Long id) {
         return ResponseEntity.ok(developerService.getInfo(id));
