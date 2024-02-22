@@ -65,6 +65,7 @@
         <module>invitation-code-service</module>
         <module>developer-service</module>
         <module>task-service</module>
+        <module>manager-service</module>
     </modules>
 
     <build>
