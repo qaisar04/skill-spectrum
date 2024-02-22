@@ -3,7 +3,9 @@ spring:
     name: indentity-service
   kafka:
     queues:
-      student: student-saving-queue
+      develop: develop-saving-queue
+      manager: manager-saving-queue
+      admin: admin-saving-queue
       email: email-sending-greeting-queue
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer

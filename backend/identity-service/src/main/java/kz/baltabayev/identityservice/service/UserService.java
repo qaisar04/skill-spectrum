@@ -1,7 +1,6 @@
 package kz.baltabayev.identityservice.service;
 
 import kz.baltabayev.identityservice.client.InviteCodeClient;
-import kz.baltabayev.identityservice.client.StudentServiceClient;
 import kz.baltabayev.identityservice.exception.InvalidCredentialsException;
 import kz.baltabayev.identityservice.exception.PasswordMismatchException;
 import kz.baltabayev.identityservice.exception.UserAlreadyExistsException;
@@ -11,7 +10,8 @@ import kz.baltabayev.identityservice.model.dto.EmailMessageDto;
 import kz.baltabayev.identityservice.model.dto.TokenResponse;
 import kz.baltabayev.identityservice.model.dto.UserRequest;
 import kz.baltabayev.identityservice.model.entity.User;
-import kz.baltabayev.identityservice.model.payload.StudentRequest;
+import kz.baltabayev.identityservice.model.payload.DeveloperSavingRequest;
+import kz.baltabayev.identityservice.model.payload.SavingRequest;
 import kz.baltabayev.identityservice.model.types.Role;
 import kz.baltabayev.identityservice.repository.UserRepository;
 import kz.baltabayev.identityservice.utils.JwtTokenUtils;
@@ -27,8 +27,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +38,6 @@ import java.util.stream.Stream;
 public class UserService {
 
     private final UserRepository userRepository;
-//    private final StudentServiceClient studentServiceClient;
     private final InviteCodeClient inviteCodeClient;
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
@@ -46,8 +46,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    @Value("${spring.kafka.queues.student}")
-    private String studentQueue;
+    @Value("${spring.kafka.queues.develop}")
+    private String developQueue;
+
+    @Value("${spring.kafka.queues.manager}")
+    private String managerQueue;
+
+    @Value("${spring.kafka.queues.admin}")
+    private String adminQueue;
 
     @Value("${spring.kafka.queues.email}")
     private String emailSendingQueue;
@@ -61,6 +67,8 @@ public class UserService {
         if (!inviteCode.isBlank() && !inviteCode.isEmpty()) {
             user.setRole(inviteCodeClient.useInviteCode(inviteCode).getBody());
             checkRole(userRequest, user);
+        } else {
+            user.setRole(Role.DEV_INTERN);
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -82,14 +90,6 @@ public class UserService {
         String token = jwtTokenUtils.generateToken(userDetails);
 
         return new TokenResponse(token);
-    }
-
-    public String generateInviteCode(String role) {
-        return inviteCodeClient.generate(role).getBody();
-    }
-
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
     private void validatePasswordConfirmation(String password, String confirmPassword) {
@@ -116,10 +116,31 @@ public class UserService {
     }
 
     private void checkRole(UserRequest userRequest, User user) {
-         if (user.getRole().equals(Role.DEVELOPER)) {
-             kafkaTemplate.send(studentQueue, new StudentRequest(
-                     userRequest.getName(), userRequest.getEmail()
-             ));
-         }
+        Map<Role, String> roleToQueueMap = new HashMap<>();
+        roleToQueueMap.put(Role.MANAGER, managerQueue);
+        roleToQueueMap.put(Role.ADMIN, adminQueue);
+
+        String role = user.getRole().name();
+        if (role.startsWith("DEV_")) {
+            String roleWithoutPrefix = role.substring(4);
+            kafkaTemplate.send(developQueue, new DeveloperSavingRequest(
+                    userRequest.getName(), userRequest.getEmail(), roleWithoutPrefix
+            ));
+        } else {
+            String queueName = roleToQueueMap.get(user.getRole());
+            if (queueName != null) {
+                kafkaTemplate.send(queueName, new SavingRequest(
+                        userRequest.getName(), userRequest.getEmail()
+                ));
+            }
+        }
+    }
+
+    public String generateInviteCode(String role) {
+        return inviteCodeClient.generate(role).getBody();
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
