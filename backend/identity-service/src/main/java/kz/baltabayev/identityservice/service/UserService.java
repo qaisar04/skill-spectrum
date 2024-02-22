@@ -37,7 +37,7 @@ import java.util.stream.Stream;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final StudentServiceClient studentServiceClient;
+//    private final StudentServiceClient studentServiceClient;
     private final InviteCodeClient inviteCodeClient;
     private final UserMapper userMapper;
     private final AuthenticationManager authenticationManager;
@@ -65,7 +65,7 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        sendGreetingEmail(userRequest);
+//        sendGreetingEmail(userRequest);
         userRepository.save(user);
     }
 
