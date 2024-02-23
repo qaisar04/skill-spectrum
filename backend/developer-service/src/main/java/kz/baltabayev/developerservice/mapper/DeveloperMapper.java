@@ -17,6 +17,7 @@ public interface DeveloperMapper {
             @Mapping(target = "developerInfo.lastname", source = "lastname"),
             @Mapping(target = "developerInfo.birthDate", source = "birthDate"),
             @Mapping(target = "developerInfo.gender", source = "gender"),
+            @Mapping(target = "developerInfo.score", source = "score"),
             @Mapping(target = "developerInfo.position", source = "position"),
     })
     Developer toEntity(DeveloperRequest dto);

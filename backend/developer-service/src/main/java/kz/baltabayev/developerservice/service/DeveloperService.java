@@ -1,9 +1,9 @@
 package kz.baltabayev.developerservice.service;
 
 import kz.baltabayev.developerservice.model.dto.DeveloperInfoResponse;
+import kz.baltabayev.developerservice.model.dto.SubmissionDto;
 import kz.baltabayev.developerservice.model.entity.Developer;
 import kz.baltabayev.developerservice.model.payload.Task;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

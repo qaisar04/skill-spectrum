@@ -17,5 +17,6 @@ public class DeveloperRequest {
     private String lastname;
     private Position position;
     private Gender gender;
+    private Double score;
     private LocalDate birthDate;
 }

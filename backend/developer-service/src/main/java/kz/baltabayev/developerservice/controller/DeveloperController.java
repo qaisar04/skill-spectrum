@@ -2,8 +2,11 @@ package kz.baltabayev.developerservice.controller;
 
 import kz.baltabayev.developerservice.mapper.DeveloperMapper;
 import kz.baltabayev.developerservice.model.dto.DeveloperRequest;
+import kz.baltabayev.developerservice.model.dto.SubmissionDto;
 import kz.baltabayev.developerservice.model.entity.Developer;
+import kz.baltabayev.developerservice.model.entity.Submission;
 import kz.baltabayev.developerservice.service.DeveloperService;
+import kz.baltabayev.developerservice.service.SubmissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import java.util.List;
 public class DeveloperController {
 
     private final DeveloperService developerService;
+    private final SubmissionService submissionService;
     private final DeveloperMapper developerMapper;
 
     @GetMapping("/all")
@@ -33,7 +37,10 @@ public class DeveloperController {
         return ResponseEntity.ok(developerService.getInfo(id));
     }
 
-//    public ResponseEntity<?> sendTask(@PostMapping )
+    @PostMapping("/submit-task")
+    public ResponseEntity<Submission> sendTask(@RequestBody SubmissionDto submissionDto) {
+        return ResponseEntity.ok(submissionService.submit(submissionDto));
+    }
 
     @PostMapping("/create")
     public ResponseEntity<Developer> createDeveloper(@RequestBody DeveloperRequest developerRequest) {

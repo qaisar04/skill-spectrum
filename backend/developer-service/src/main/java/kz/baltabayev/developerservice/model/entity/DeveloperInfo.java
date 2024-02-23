@@ -26,6 +26,7 @@ public class DeveloperInfo implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Position position;
+    private Double score;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
