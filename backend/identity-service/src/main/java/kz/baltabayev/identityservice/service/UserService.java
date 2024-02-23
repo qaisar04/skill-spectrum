@@ -79,7 +79,13 @@ public class UserService {
         return new SecurityResponse(user, token);
     }
 
-    public SecurityResponse authenticate(AuthRequest authRequest) {
+    public User getInfo(TokenResponse token) {
+        String username = jwtTokenUtils.extractUsername(token.token());
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.orElseThrow(() -> new UserNotFoundException("User not found"));
+    }
+
+    public TokenResponse authenticate(AuthRequest authRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password())
@@ -89,10 +95,9 @@ public class UserService {
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.username());
-        User user = findByUsername(authRequest.username());
         String token = jwtTokenUtils.generateToken(userDetails);
 
-        return new SecurityResponse(user, token);
+        return new TokenResponse(token);
     }
 
     private void validatePasswordConfirmation(String password, String confirmPassword) {

@@ -12,6 +12,7 @@ public class Task {
     private String title;
     private String description;
     private Long assignedDeveloperId;
+    private LocalDateTime createdAt;
     private LocalDateTime deadline;
     private Status status;
 }

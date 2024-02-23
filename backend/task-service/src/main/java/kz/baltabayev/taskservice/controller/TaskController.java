@@ -10,27 +10,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/task")
 @RequiredArgsConstructor
-public class TaskContrtoller {
+public class TaskController {
 
     private final TaskService taskService;
     private final TaskMapper taskMapper;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        return ResponseEntity.ok(taskService.get(id));
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getAllTasks() {
         return ResponseEntity.ok(taskService.getAll());
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/dev-id/{id}")
     public ResponseEntity<List<Task>> getTasksByDeveloperId(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.getByDeveloperId(id));
     }
 
-    @GetMapping("/id/{id}/{status}")
+    @GetMapping("/dev-id/{id}/{status}")
     public ResponseEntity<List<Task>> getTasksByDeveloperIdAndStatus(@PathVariable Long id, @PathVariable String status) {
         return ResponseEntity.ok(taskService.getAllByDeveloperIdAndStatus(id, Status.valueOf(status.toUpperCase())));
     }

@@ -25,8 +25,13 @@ public class SecurityController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<SecurityResponse> authenticate(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<TokenResponse> authenticate(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ok(userService.authenticate(authRequest));
+    }
+
+    @PostMapping("/info")
+    public ResponseEntity<User> getInfo(@RequestBody TokenResponse token) {
+        return ResponseEntity.ok(userService.getInfo(token));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

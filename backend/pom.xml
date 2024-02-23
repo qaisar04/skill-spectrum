@@ -67,6 +67,7 @@
         <module>task-service</module>
         <module>manager-service</module>
         <module>grading-service</module>
+        <module>reviewer-service</module>
     </modules>
 
     <build>
