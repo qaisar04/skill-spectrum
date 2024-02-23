@@ -13,9 +13,9 @@ public interface DeveloperMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "email", source = "email"),
-            @Mapping(target = "developerInfo.firstname", source = "name"),
-            @Mapping(target = "developerInfo.lastname", source = "lasname"),
-            @Mapping(target = "developerInfo.birthDate", source = "birthdate"),
+            @Mapping(target = "developerInfo.firstname", source = "firstname"),
+            @Mapping(target = "developerInfo.lastname", source = "lastname"),
+            @Mapping(target = "developerInfo.birthDate", source = "birthDate"),
             @Mapping(target = "developerInfo.gender", source = "gender"),
             @Mapping(target = "developerInfo.position", source = "position"),
     })
