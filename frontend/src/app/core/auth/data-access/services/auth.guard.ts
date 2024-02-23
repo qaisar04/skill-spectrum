@@ -1,15 +1,14 @@
-import { inject } from "@angular/core";
-import { Router } from "@angular/router";
-import { LocalStorageJwtService } from "./local-storage-jwt.service";
-
+import {inject} from '@angular/core'
+import {Router} from '@angular/router'
+import {LocalStorageJwtService} from './local-storage-jwt.service'
 
 export const authGuard = () => {
-  const router = inject(Router);
-  const storage = inject(LocalStorageJwtService);
+  const router = inject(Router)
+  const storage = inject(LocalStorageJwtService)
 
   if (!storage.getItem()) {
-    router.navigate(['/']);
-    return false;
+    router.navigate(['/login'])
+    return false
   }
-  return true;
-};
+  return true
+}

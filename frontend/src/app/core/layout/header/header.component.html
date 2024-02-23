@@ -1,7 +1,13 @@
 <div class="flex justify-between items-center p-5 bg-blue-600">
-  <div class="text-xl text-white font-bold cursor-pointer transition-all hover:opacity-70">SkillSpectrum</div>
-  <div>
-    <i class="ri-notification-3-fill text-xl cursor-pointer text-white mr-5 transition-all hover:opacity-70"></i>
-    <i class="ri-user-fill text-xl text-white cursor-pointer transition-all hover:opacity-70"></i>
+  <a [routerLink]="['/tasks']" class="text-xl text-white font-bold cursor-pointer transition-all hover:opacity-70">SkillSpectrum</a>
+  <div class="flex justify-between items-center">
+    <button (click)="logout()" class="mr-5" mat-raised-button>Log Out</button>
+    <a [routerLink]="['/invite-code']" class="mr-5">
+      <i class="ri-user-add-fill text-xl text-white cursor-pointer transition-all hover:opacity-70"></i>
+    </a>
+    <a [routerLink]="['/profile']" class="mr-5">
+      <i class="ri-user-fill text-xl text-white cursor-pointer transition-all hover:opacity-70"></i>
+    </a>
+    <i class="ri-notification-3-fill text-xl cursor-pointer text-white transition-all hover:opacity-70"></i>
   </div>
 </div>

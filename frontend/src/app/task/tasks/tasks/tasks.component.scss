@@ -1,0 +1,34 @@
+/* Стили для таблицы */
+table {
+  width: 100%; /* Растягиваем таблицу на всю ширину экрана */
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+/* Стили для заголовков столбцов */
+th {
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Стили для строк данных */
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Стили для четных строк */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button {
+  color: navy;
+}
+
+button:hover {
+  opacity: 0.7;
+}

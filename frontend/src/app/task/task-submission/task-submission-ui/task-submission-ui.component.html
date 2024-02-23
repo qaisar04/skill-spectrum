@@ -1,0 +1,20 @@
+<div class="flex justify-center items-center h-screen">
+  <form
+    (ngSubmit)="onCreateSubmission()"
+    [formGroup]="formGroup"
+    class="flex flex-col"
+  >
+    <h1>Submite your commit</h1>
+    <mat-form-field>
+      <mat-label>Link to your commit</mat-label>
+      <input [formControlName]="'link'" matInput required/>
+    </mat-form-field>
+    <button
+      color="primary"
+      mat-raised-button
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>

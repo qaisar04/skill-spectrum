@@ -1,0 +1,24 @@
+<table *ngIf="tasks">
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>title</th>
+    <th>responsible</th>
+    <th>createdAt</th>
+    <th>deadline</th>
+    <th>status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks">
+    <td>{{ task.id }}</td>
+    <td>
+      <button (click)="goToDetail(+task.id)">{{ task.title }}</button>
+    </td>
+    <td>{{ task.assignedDeveloperId }}</td>
+    <td>{{ task.createdAt }}</td>
+    <td>{{ task.deadline }}</td>
+    <td>{{ task.status }}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<div class="flex mt-20 justify-center ml-20 text-xl flex-col">
+  <div class="text-5xl">Profile</div>
+  <div *ngIf="(user | async) as user">
+    <div>name: {{ user.name }}</div>
+    <div>username: {{ user.username }}</div>
+    <div>email: {{ user.email }}</div>
+    <div>role: {{ user.role }}</div>
+  </div>
+</div>

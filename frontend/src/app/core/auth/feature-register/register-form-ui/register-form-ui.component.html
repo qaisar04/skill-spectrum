@@ -1,45 +1,45 @@
 <div class="flex justify-center items-center h-screen">
   <form
-    class="flex flex-col"
-    [formGroup]="formGroup"
     (ngSubmit)="onRegister()"
+    [formGroup]="formGroup"
+    class="flex flex-col"
   >
     <h1>Register</h1>
     <mat-form-field>
       <mat-label>Enter your name</mat-label>
-      <input matInput required [formControlName]="'name'" />
+      <input [formControlName]="'name'" matInput required/>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your username</mat-label>
-      <input matInput required [formControlName]="'username'" />
+      <input [formControlName]="'username'" matInput required/>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your email</mat-label>
       <input
+        [formControlName]="'email'"
         matInput
         placeholder="pat@example.com"
         required
-        [formControlName]="'email'"
       />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your invite code</mat-label>
-      <input matInput required [formControlName]="'inviteCode'" />
+      <input [formControlName]="'inviteCode'" matInput/>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
       <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
         [formControlName]="'password'"
+        [type]="hide ? 'password' : 'text'"
+        matInput
       />
       <button
-        mat-icon-button
-        matSuffix
-        type="button"
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
+        mat-icon-button
+        matSuffix
+        type="button"
       >
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
@@ -47,24 +47,24 @@
     <mat-form-field>
       <mat-label>Confirm password</mat-label>
       <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
         [formControlName]="'confirmPassword'"
+        [type]="hide ? 'password' : 'text'"
+        matInput
       />
       <button
-        mat-icon-button
-        matSuffix
-        type="button"
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
+        mat-icon-button
+        matSuffix
+        type="button"
       >
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
     </mat-form-field>
     <button
-      mat-raised-button
       color="primary"
+      mat-raised-button
       type="submit"
     >
       Sign Up

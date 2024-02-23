@@ -1,0 +1,17 @@
+<form (ngSubmit)="onGetInvitationCode()" [formGroup]="formGroup"
+      class="flex flex-col items-center justify-center mt-60">
+  <mat-form-field>
+    <mat-label>Select position</mat-label>
+    <mat-select [formControlName]="'position'" required>
+      <mat-option value="MANAGER">Manager</mat-option>
+      <mat-option value="ADMIN">Admin</mat-option>
+      <mat-option value="DEV_INTERN">Intern</mat-option>
+      <mat-option value="DEV_JUNIOR">Junior</mat-option>
+      <mat-option value="DEV_STRONG_JUNIOR">Strong junior</mat-option>
+      <mat-option value="DEV_MIDDLE">Middle</mat-option>
+      <mat-option value="DEV_MIDDLE_PLUS">Middle+</mat-option>
+      <mat-option value="DEV_SENIOR">Senior</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button color="primary" mat-raised-button>Get invitation code</button>
+</form>
