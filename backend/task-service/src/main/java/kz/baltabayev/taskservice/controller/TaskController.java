@@ -45,8 +45,8 @@ public class TaskController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<Task> updateTask(@RequestBody TaskDto taskDto) {
-        return ResponseEntity.ok(taskService.update(taskMapper.toEntity(taskDto)));
+    public ResponseEntity<Task> updateTask(@RequestBody Task task) {
+        return ResponseEntity.ok(taskService.update(task));
     }
 
     @DeleteMapping("/delete/{id}")
