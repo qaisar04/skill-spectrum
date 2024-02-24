@@ -29,6 +29,7 @@ target/
 **/*mvnw
 mvnw
 .idea
+volumes/
 
 ### NetBeans ###
 /nbproject/private/
