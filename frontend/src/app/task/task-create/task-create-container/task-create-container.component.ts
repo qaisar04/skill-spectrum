@@ -1,20 +1,12 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core'
-import {TaskCreateUiComponent} from '../task-create-ui/task-create-ui.component'
-import {TaskFacade} from '../../data-access/task.facade'
-import {CreateTask} from '../../data-access/models/tasks.model'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-task-create-container',
   standalone: true,
-  imports: [TaskCreateUiComponent],
+  imports: [],
   templateUrl: './task-create-container.component.html',
-  styleUrl: './task-create-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './task-create-container.component.scss'
 })
 export class TaskCreateContainerComponent {
-  private readonly taskFacade = inject(TaskFacade)
 
-  onCreateTask(task: CreateTask) {
-    this.taskFacade.createTask(task)
-  }
 }

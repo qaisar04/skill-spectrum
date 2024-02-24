@@ -1,38 +1,38 @@
 <div class="flex justify-center items-center h-screen">
   <form
-    (ngSubmit)="onLogin()"
-    [formGroup]="formGroup"
     class="flex flex-col"
+    [formGroup]="formGroup"
+    (ngSubmit)="onLogin()"
   >
     <h1>Login</h1>
     <mat-form-field>
       <mat-label>Enter your username</mat-label>
-      <input [formControlName]="'username'" matInput required/>
+      <input matInput required [formControlName]="'username'" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your password</mat-label>
       <input
-        [formControlName]="'password'"
-        [type]="hide ? 'password' : 'text'"
         matInput
+        [type]="hide ? 'password' : 'text'"
+        [formControlName]="'password'"
       />
       <button
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
         mat-icon-button
         matSuffix
         type="button"
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
       >
         <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
     </mat-form-field>
     <button
-      color="primary"
       mat-raised-button
+      color="primary"
       type="submit"
     >
-      Sign In
+      Sign Up
     </button>
     <a
       (click)="onRedirectToSignUp()"

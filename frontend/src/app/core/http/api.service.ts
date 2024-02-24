@@ -1,47 +1,42 @@
-import {Injectable, inject} from '@angular/core'
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http'
-import {Observable} from 'rxjs'
-import {API_URL} from './api-url.token'
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API_URL } from './api-url.token';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ApiService {
-  private readonly http = inject(HttpClient)
-  private readonly apiUrl = inject(API_URL)
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = inject(API_URL);
 
-  public get<T>(
-    url: string,
-    params: HttpParams = new HttpParams(),
-  ): Observable<T> {
+  public get<T>(url: string, params: HttpParams = new HttpParams()): Observable<T> {
     return this.http.get<T>(`${this.apiUrl}${url}`, {
       headers: this.headers,
       params,
-    })
+    });
   }
 
   public post<T, D>(url: string, data?: D): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}${url}`, JSON.stringify(data), {
-      headers: this.headers,
-    })
+    return this.http.post<T>(`${this.apiUrl}${url}`, JSON.stringify(data), { headers: this.headers });
   }
 
   public put<T, D>(url: string, data: D): Observable<T> {
     return this.http.put<T>(`${this.apiUrl}${url}`, JSON.stringify(data), {
       headers: this.headers,
-    })
+    });
   }
 
   public delete<T>(url: string): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}${url}`, {
       headers: this.headers,
-    })
+    });
   }
 
   private get headers(): HttpHeaders {
     const headersConfig = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-    }
+    };
 
-    return new HttpHeaders(headersConfig)
+    return new HttpHeaders(headersConfig);
   }
 }

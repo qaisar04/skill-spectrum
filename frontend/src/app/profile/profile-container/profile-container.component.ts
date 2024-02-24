@@ -1,12 +1,12 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core'
-import {ProfileComponent} from '../profile/profile.component'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-profile-container',
   standalone: true,
-  imports: [ProfileComponent],
+  imports: [],
   templateUrl: './profile-container.component.html',
-  styleUrl: './profile-container.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './profile-container.component.scss'
 })
-export class ProfileContainerComponent {}
+export class ProfileContainerComponent {
+
+}

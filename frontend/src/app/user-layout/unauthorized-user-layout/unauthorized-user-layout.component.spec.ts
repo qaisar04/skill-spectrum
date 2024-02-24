@@ -11,7 +11,7 @@ describe('UnauthorizedUserLayoutComponent', () => {
       imports: [UnauthorizedUserLayoutComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(UnauthorizedUserLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

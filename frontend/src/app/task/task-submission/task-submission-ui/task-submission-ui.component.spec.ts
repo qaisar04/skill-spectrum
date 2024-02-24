@@ -11,7 +11,7 @@ describe('TaskSubmissionUiComponent', () => {
       imports: [TaskSubmissionUiComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(TaskSubmissionUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

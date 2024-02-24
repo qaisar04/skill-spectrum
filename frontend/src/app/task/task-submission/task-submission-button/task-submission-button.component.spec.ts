@@ -11,7 +11,7 @@ describe('TaskSubmissionButtonComponent', () => {
       imports: [TaskSubmissionButtonComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(TaskSubmissionButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

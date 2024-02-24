@@ -1,16 +1,19 @@
-import {createActionGroup, emptyProps, props} from '@ngrx/store'
-import {LoginPayload, RegisterPayload, Token} from '../models/sign.model'
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import {RegisterPayload} from "../models/sign.model";
 
 export const authActions = createActionGroup({
   source: 'Auth',
   events: {
-    authSuccess: props<{token: Token}>(),
+    registerSuccess: emptyProps(),
+    loginSuccess: emptyProps(),
 
     register: props<{req: RegisterPayload}>(),
-    login: props<{req: LoginPayload}>(),
+    login: emptyProps(),
     logout: emptyProps(),
 
     registerFailure: emptyProps(),
-    loginFailure: emptyProps(),
-  },
-})
+    loginFailure: emptyProps()
+  }
+});
+
+
