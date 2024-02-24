@@ -6,3 +6,12 @@ export interface RegisterPayload {
   password: string
   confirmPassword: string
 }
+
+export interface LoginPayload {
+  username: string
+  password: string
+}
+
+export interface Token {
+  token: string
+}

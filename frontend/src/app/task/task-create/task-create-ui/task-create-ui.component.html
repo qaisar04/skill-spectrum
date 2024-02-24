@@ -1,1 +1,37 @@
-<p>task-create-ui works!</p>
+<div class="flex justify-center items-center h-screen">
+  <form
+    (ngSubmit)="onCreateTask()"
+    [formGroup]="formGroup"
+    class="flex flex-col"
+  >
+    <h1>Create task</h1>
+    <mat-form-field>
+      <mat-label>Enter title</mat-label>
+      <input [formControlName]="'title'" matInput required/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Enter description</mat-label>
+      <input [formControlName]="'description'" matInput required/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select responsible</mat-label>
+      <mat-select [formControlName]="'assignedDeveloperId'" matNativeControl required>
+        <mat-option [value]="1">1</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input [formControlName]="'deadline'" [matDatepicker]="picker" [max]="maxDate" [min]="minDate" matInput>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button
+      color="primary"
+      mat-raised-button
+      type="submit"
+    >
+      Create
+    </button>
+  </form>
+</div>

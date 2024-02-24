@@ -1,20 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core'
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageJwtService {
-
   getItem(): string | null {
-    return localStorage.getItem('jwtToken') || null;
+    return localStorage.getItem('jwtToken') || null
   }
 
   setItem(data: string): string {
-    localStorage.setItem('jwtToken', data);
-    return data;
+    localStorage.setItem('jwtToken', data)
+    return data
   }
 
   removeItem(): boolean {
-    localStorage.removeItem('jwtToken');
-    return true;
+    localStorage.removeItem('jwtToken')
+    return true
   }
 }

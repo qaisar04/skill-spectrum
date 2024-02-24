@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<div class="flex h-screen justify-center items-center flex-col">
+  <h1>Profile</h1>
+  <div *ngIf="(user | async) as user">
+    <div>{{ user.name }}</div>
+    <div>{{ user.username }}</div>
+    <div>{{ user.email }}</div>
+    <div>{{ user.role }}</div>
+  </div>
+</div>
